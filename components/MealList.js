@@ -2,8 +2,10 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import MealItem from "../components/MealItem";
+import { useSelector } from "react-redux";
 
 const MealList = (props) => {
+  const favMeals = useSelector((state) => state.meals.favMeals);
   const renderMealItem = (itemData) => {
     return (
       <MealItem
@@ -18,6 +20,7 @@ const MealList = (props) => {
             params: {
               mealId: itemData.item.id,
               mealTitle: itemData.item.title,
+              isFav: favMeals.some((meal) => meal.id === itemData.item.id),
             },
           });
         }}
